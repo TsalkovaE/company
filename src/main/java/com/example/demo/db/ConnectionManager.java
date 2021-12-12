@@ -15,7 +15,7 @@ public class ConnectionManager {
     private ConnectionManager() {
         try {
             InitialContext cxt = new InitialContext();
-            DataSource ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/company");
+            DataSource ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/companydb");
             if (ds == null) {
                 throw new IllegalArgumentException("Data source not found!");
             } else {

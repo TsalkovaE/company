@@ -21,6 +21,7 @@ import javax.servlet.annotation.*;
 public class MainServlet extends HttpServlet {
     private String message;
     private Connection connection;
+    List<Department> departments = new DepartmentDAO().getAllDepartments();
 
     public void init() {
         message = "Hello World!";
@@ -43,7 +44,6 @@ public class MainServlet extends HttpServlet {
             }
         }
         if(actionDep != null) {
-            List<Department> departments = new DepartmentDAO().getAllDepartments();
             request.setAttribute("departmentbean", new DepartmentBean(departments));
             try {
                 request.getRequestDispatcher("/departments.jsp").forward(request, response);
@@ -56,16 +56,19 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("department", new DepartmentBean(departments));
         request.getRequestDispatcher("/newemployee.jsp").forward(request, response);
-        int id = Integer.parseInt(request.getParameter("id"));
+
         String firstName = request.getParameter("first");
         String lastName = request.getParameter("last");
         int departmentId = Integer.parseInt(request.getParameter("department"));
         int preference = Integer.parseInt(request.getParameter("preference"));
-        String position = request.getParameter("position");
-        Employee employee = new Employee(id, firstName, lastName, departmentId, preference, position);
+        int positionId = Integer.parseInt(request.getParameter("position"));
+        Employee employee = new Employee(firstName, lastName, departmentId, preference, positionId);
 
         new EmployeeDAO().addNewEmployee(employee);
+        //request.setAttribute("employee", employee);
+        request.getRequestDispatcher("employees.jsp").forward(request,response);
 
     }
 

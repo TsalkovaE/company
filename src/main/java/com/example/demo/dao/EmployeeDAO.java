@@ -13,10 +13,10 @@ public class EmployeeDAO {
         List<Employee> employees = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("select e.id, e.\"firstName\", e.\"lastName\", e.\"preferences\",\n" +
-                    "d.\"title\" as department, p.\"title\" as position, d.\"typeofsalary\"\n" +
-                    "from \"employees\" e\n" +
-                    "join \"departments\" d on d.id = e.departmentid\n" +
+            ResultSet rs = statement.executeQuery("select e.id, e.firstname, e.lastname, e.preferences,\n" +
+                    "d.title as department, p.title as position, d.typeofsalary\n" +
+                    "from employees e\n" +
+                    "join departments d on d.id = e.departmentid\n" +
                     "left join positions p on e.positionid = p.id\n" +
                     "order by e.id");
             while(rs.next()){
@@ -39,7 +39,6 @@ public class EmployeeDAO {
         Connection connection = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement("insert into employees values(?, ?, ?, ?, ?, ?)");
-            statement.setInt(1, employee.getId());
             statement.setString(2, employee.getFirstName());
             statement.setString(3, employee.getLastName());
             statement.setInt(4, employee.getDepartmentId());

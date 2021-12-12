@@ -28,6 +28,7 @@
             <td>${e.firstName}</td>
             <td>${e.lastName}</td>
             <td>${e.department}</td>
+            <td>${e.preference}</td>
             <td>${e.salary}</td>
             <td>${e.position}</td>
         </tr>

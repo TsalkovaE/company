@@ -7,16 +7,11 @@ public class Employee {
     private int departmentId;
     private String department;
     private int preference;
+    private int positionId;
     private String position;
     private String salary;
 
-    public int getPreference() {
-        return preference;
-    }
 
-    public void setPreference(int preference) {
-        this.preference = preference;
-    }
 
     public Employee(int id, String firstName, String lastName, int departmentId, int preference, String position) {
         this.id = id;
@@ -35,6 +30,14 @@ public class Employee {
         this.salary = salary;
         this.position = position;
 
+    }
+
+    public Employee(String firstName, String lastName, int departmentId, int preference, int positionId){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.departmentId = departmentId;
+        this.preference = preference;
+        this.positionId = positionId;
     }
 
     public int getId() {
@@ -91,5 +94,20 @@ public class Employee {
 
     public void setSalary(String salary) {
         this.salary = salary;
+    }
+
+    public int getPositionId() {
+        return positionId;
+    }
+
+    public void setPositionId(int positionId) {
+        this.positionId = positionId;
+    }
+    public int getPreference() {
+        return preference;
+    }
+
+    public void setPreference(int preference) {
+        this.preference = preference;
     }
 }
