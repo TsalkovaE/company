@@ -12,6 +12,7 @@ import com.example.demo.data.Employee;
 import com.example.demo.data.Preference;
 import com.example.demo.db.ConnectionManager;
 import com.example.demo.util.Utility;
+import com.example.demo.validators.Validator;
 
 import java.io.*;
 import java.sql.Connection;
@@ -34,7 +35,7 @@ public class MainServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String actionEmpl = request.getParameter("allemployees");
+        String actionEmpl = request.getParameter("allemployees");   //Это похоже костыль, но не нашла, как правильно обработать разные запросы
         String actionDep = request.getParameter("alldepartments");
         if(actionEmpl != null) {
             List<Employee> employees = new EmployeeDAO().findAll();
@@ -67,13 +68,17 @@ public class MainServlet extends HttpServlet {
             request.getRequestDispatcher("/result.jsp").forward(request, response);
         }
         if(actionNewEmpl != null) {
-            request.setAttribute("department", new DepartmentBean(departments));
+            request.setAttribute("department", new DepartmentBean(departments));    // Тут "костыль" не сработал
             request.getRequestDispatcher("/newemployee.jsp").forward(request, response);
             String firstName = request.getParameter("first");
             String lastName = request.getParameter("last");
             int departmentId = Integer.parseInt(request.getParameter("department"));
             Preference preference = Preference.valueOf(request.getParameter("preference"));
             int positionId = Integer.parseInt(request.getParameter("position"));
+
+            if(!new Validator().validateName(firstName)||!new Validator().validateName(lastName))
+                throw new IOException("Wrong input data.");
+
             Employee employee = new Employee(firstName, lastName, departmentId, preference, positionId);
 
             new EmployeeDAO().addNewEmployee(employee);
