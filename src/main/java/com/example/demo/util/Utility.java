@@ -10,8 +10,10 @@ public class Utility {
         double result1 = 0;
         double result2 = 0;
         List<Employee> employeesList = new EmployeeDAO().findAll();
-        long emplMatchLater = employeesList.stream().filter(e -> e.getPreference()==1).count();
-        long emplMatchEarlier = employeesList.stream().filter(e -> e.getPreference()==2).count();
+        long emplMatchLater = employeesList.stream()
+                .filter(e -> String.valueOf(e.getPreference()).equalsIgnoreCase("later")).count();
+        long emplMatchEarlier = employeesList.stream()
+                .filter(e -> String.valueOf(e.getPreference()).equalsIgnoreCase("earlier")).count();
         int standard = 9;
         int hours = newTime - standard;
 

@@ -1,6 +1,5 @@
 package com.example.demo.dao;
 
-import com.example.demo.beans.EmployeeBean;
 import com.example.demo.data.Department;
 import com.example.demo.data.Employee;
 import com.example.demo.db.ConnectionManager;
@@ -27,6 +26,13 @@ public class DepartmentDAO {
                 departments.add(department);
                 List<Employee> employees = new EmployeeDAO().findAll();
 
+                for (Department value : departments) {
+                    for (Employee employee : employees) {
+                        if (employee.getDepartment().equals(value.getTitle())) {
+                            value.getEmployees().add(employee);
+                        }
+                    }
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

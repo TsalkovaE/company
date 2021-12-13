@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.data.Employee;
+import com.example.demo.data.Preference;
 import com.example.demo.db.ConnectionManager;
 
 import java.sql.*;
@@ -26,6 +27,7 @@ public class EmployeeDAO {
                 String depart = rs.getString("department");
                 String salary = rs.getString("typeofsalary");
                 String position = rs.getString("position");
+               // Preference preference = Preference.valueOf(rs.getString("preferences"));
                 Employee employee = new Employee(id, firstName, lastName, depart, salary, position);
                 employees.add(employee);
             }
@@ -42,7 +44,7 @@ public class EmployeeDAO {
             statement.setString(2, employee.getFirstName());
             statement.setString(3, employee.getLastName());
             statement.setInt(4, employee.getDepartmentId());
-            statement.setInt(5, employee.getPreference());
+            statement.setString(5, String.valueOf(employee.getPreference()));
             statement.setString(6, employee.getPosition());
             statement.executeUpdate();
         } catch (SQLException e) {

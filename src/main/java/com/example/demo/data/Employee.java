@@ -6,14 +6,12 @@ public class Employee {
     private String lastName;
     private int departmentId;
     private String department;
-    private int preference;
+    private Preference preference;
     private int positionId;
     private String position;
     private String salary;
 
-
-
-    public Employee(int id, String firstName, String lastName, int departmentId, int preference, String position) {
+    public Employee(int id, String firstName, String lastName, int departmentId, String position, Preference preference) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -32,7 +30,7 @@ public class Employee {
 
     }
 
-    public Employee(String firstName, String lastName, int departmentId, int preference, int positionId){
+    public Employee(String firstName, String lastName, int departmentId, Preference preference, int positionId){
         this.firstName = firstName;
         this.lastName = lastName;
         this.departmentId = departmentId;
@@ -103,11 +101,11 @@ public class Employee {
     public void setPositionId(int positionId) {
         this.positionId = positionId;
     }
-    public int getPreference() {
+    public Preference getPreference() {
         return preference;
     }
 
-    public void setPreference(int preference) {
+    public void setPreference(Preference preference) {
         this.preference = preference;
     }
 }

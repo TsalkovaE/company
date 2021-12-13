@@ -17,5 +17,8 @@
 <form method="post" action="newemployee.html">
     <input type="submit" value="Add new employee" name="newemployee"/>
 </form>
+<form method="post" action="efficiency.jsp">
+    <input type="submit" value="Calculate efficiency" name="efficiency"/>
+</form>
 </body>
 </html>
